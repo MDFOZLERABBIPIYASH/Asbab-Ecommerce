@@ -1,0 +1,16 @@
+Admin Panel:-
+1) Categories Admin/ Update/ Delete/ Active/ Dactive
+2) Product Admin/ Update/ Delete/ Active/ Decative
+3) Order Master
+4) User listing 
+5)Contact Us Leads
+
+
+Front End:- 
+1) Home Page
+2) Categories Listing
+3) Product Details
+4) Add to cart order
+5) Order history
+6) User Login/ Register
+7) Check Out 
