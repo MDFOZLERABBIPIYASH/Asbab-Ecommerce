@@ -100,22 +100,6 @@
                                             ?>
                                         </li>
                                     </ul>
-                                    <div class="sin__desc">
-                                            <p><span>Quantity</span> 
-                                                <select name="qty" id="qty">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                </select>
-                                            </p>
-                                        </div>
                                     <p class="pro__info"><?php echo $list['meta_des']; ?></p>
                                     <div class="ht__pro__desc">
                                         <div class="sin__desc">

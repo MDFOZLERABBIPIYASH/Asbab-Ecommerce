@@ -3,25 +3,28 @@
     require "funcition.php";
 
     if(isset($_POST['add'])){
-       // print_r($_POST['id']);
+       //print_r($_POST['id']);
        
 
         if(isset($_SESSION['cart'])){
-            $column=$_POST['id'];
-            $item_array_id=array_column($_SESSION['cart'],$column."id");
-            $count=count($_SESSION['cart']);
-            $item_array = array(
-                'id'=>$_POST['id']
-            );
-            $_SESSION['cart'][$count]=$item_array;
-            $item_array = array(
-                'Pro_id'=>$_POST['id']
-            );
-            //$_SESSION['cart'][0]=$item_array;
-            print_r($_SESSION['cart']);
-            
-
-            
+            //$column=$_POST['id'];
+            //echo $column;
+            $item_array_id=array_column($_SESSION['cart'],column_key:"id");
+            print_r($item_array_id);
+            if(in_array($_POST['id'],$item_array_id)){
+                echo "<script>alert('Product is already added...!!')</script>";
+            }else{
+                $count=count($_SESSION['cart']);
+                $item_array = array(
+                    'id'=>$_POST['id']
+                );
+                $_SESSION['cart'][$count]=$item_array;
+                /*$item_array = array(
+                    'Pro_id'=>$_POST['id']
+                );*/
+                //$_SESSION['cart'][0]=$item_array;
+                
+            }
         }else{
             $item_array = array(
                 'Pro_id'=>$_POST['id']
@@ -29,8 +32,8 @@
             $_SESSION['cart'][0]=$item_array;
             print_r($_SESSION['cart']);
             echo "nothing........!!!!";
-        }
     }
+}
     
 ?>
         <!-- Start Bradcaump area -->
@@ -51,7 +54,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <form action="#">               
+                        <form action="cart.php" method="GET">                            
                             <div class="table-content table-responsive">
                                 <table>
                                     <thead>
@@ -65,24 +68,37 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
-                                        $result= getcartdata($conn);
-                                        while($row=mysqli_fetch_assoc($result)){
-                                    ?>
+                                        <?php
+                                            $product_id=array_column($_SESSION['cart'],column_key:"id");
+                                            $get_product_cart = get_product_cart($conn);
+                                            if(count($get_product_cart)>0){
+                                                foreach($product_id as $pro_id){
+                                                    if($_POST['id']==$pro_id){
+                                                        echo "ok";
+                                                    
+                                        
+                                        ?>
                                         <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="admin_login/admin_dasboard/<?php echo $row['img']; ?>" height="230px" width="385px" alt=""></a></td>
+                                            <td class="product-thumbnail"><a href="#"><img src="admin_login/admin_dasboard/<?php echo $row['img']; ?>" alt="product img" /></a></td>
                                             <td class="product-name"><a href=""><?php echo $row['name']; ?></a>
                                                 <ul  class="pro__prize">
-                                                    <li class="old__prize"><?php echo "$".$row['Price']; ?></li>
-                                                    <li><?php echo "$".$row['sale_price']; ?></li>
+                                                    <li class="old__prize">$82.5</li>
+                                                    <li>$75.2</li>
                                                 </ul>
                                             </td>
                                             <td class="product-price"><span class="amount">£165.00</span></td>
                                             <td class="product-quantity"><input type="number" value="1" /></td>
                                             <td class="product-subtotal">£165.00</td>
-                                            <td class="product-remove"><a href="#"><i class="icon-trash icons"></i></a></td>
+                                            <td class="product-remove">
+                                                <button type="submit" class="btn btn-danger"><i class="icon-trash icons"></i></button>
+                                                <button type="submit" class="btn btn-warning"><i class="icon-heart icons"></i></button>
+                                            </td>
                                         </tr>
-                                        <?php } ?>
+                                        <?php
+                                            }
+                                        }
+                                    }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

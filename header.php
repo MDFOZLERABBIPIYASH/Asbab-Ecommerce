@@ -1,6 +1,7 @@
 <?php
     require "db.php";
     session_start();
+    $_SESSION['cart'];
     
     /*if(!isset($_SESSION['name'])){
         header("../index.php");
@@ -242,8 +243,16 @@
                                             }
                                         ?>
                                     <div class="htc__shopping__cart">
-                                        <a class="cart__menu" href="cart.php"><i class="icon-handbag icons"></i></a>
-                                        <a href="#"><span class="htc__qua">2</span></a>
+                                        <a class="" href="cart.php"><i class="icon-handbag icons"></i></a>
+                                        <?php
+                                            if(isset($_SESSION['name'])){
+                                                $count=count($_SESSION['cart']);
+                                                echo "<a href='cart.php'><span class='htc__qua'>$count</span></a>";
+                                            }else{
+                                                echo "<a href='cart.php'><span class='htc__qua'>0</span></a>";
+                                            }
+                                        ?>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -259,7 +268,7 @@
         <!-- Start Offset Wrapper -->
         <div class="offset__wrapper">
             <!-- Start Cart Panel -->
-            <div class="shopping__cart">
+            <!--<div class="shopping__cart">
                 <div class="shopping__cart__inner">
                     <div class="offsetmenu__close__btn">
                         <a href="#"><i class="zmdi zmdi-close"></i></a>
@@ -305,7 +314,7 @@
                         <li class="shp__checkout"><a href="checkout.html">Checkout</a></li>
                     </ul>
                 </div>
-            </div>
+            </div>-->
             <!-- End Cart Panel -->
         </div>
         <!-- End Offset Wrapper -->

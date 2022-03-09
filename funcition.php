@@ -1,6 +1,24 @@
 <?php
 
 //for get product detalis
+function get_product_cart($conn,$pro_id=''){
+    $pro_id=$_POST['id'];
+
+
+
+    $sql_pro="SELECT * FROM product  WHERE id='$pro_id' and status=1";
+    
+    $pro_query=mysqli_query($conn,$sql_pro);
+    $data=array();
+    while($row=mysqli_fetch_assoc($pro_query)){
+        $data[]=$row;
+    }
+    return $data;
+}
+
+
+
+//for get product detalis
     function get_product_det($conn,$pro_id=''){
         $pro_id=$_GET['id'];
 
@@ -67,12 +85,13 @@
     // get data for cart
 
     function getcartdata($conn,$id=''){
-    $id=$_POST['add'];
-    echo $id;
-        $sql="SELECT * FROM product WHERE id='$id'";
+    $id=$_POST['id'];
+    //echo $id;
+        $sql="SELECT * FROM product WHERE id='$id' ASC";
         $result=mysqli_query($conn,$sql);
         if(mysqli_num_rows($result)>0){
-        return $result;
-        }   
+        
+        }
+        return $result;   
     }
 ?>
