@@ -1,7 +1,7 @@
 <?php
     require "db.php";
     session_start();
-    $_SESSION['cart'];
+    //$_SESSION['cart'];
     
     /*if(!isset($_SESSION['name'])){
         header("../index.php");

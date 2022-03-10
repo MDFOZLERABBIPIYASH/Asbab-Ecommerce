@@ -465,28 +465,7 @@
             </div>
         </section>
         <!-- End Top Rated Area -->
-        <!-- Start Brand Area -->
-        <div class="htc__brand__area bg__cat--4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="ht__brand__inner">
-                            <ul class="brand__list owl-carousel clearfix">
-                                <li><a href="#"><img src="images/brand/1.png" alt="brand images"></a></li>
-                                <li><a href="#"><img src="images/brand/2.png" alt="brand images"></a></li>
-                                <li><a href="#"><img src="images/brand/3.png" alt="brand images"></a></li>
-                                <li><a href="#"><img src="images/brand/4.png" alt="brand images"></a></li>
-                                <li><a href="#"><img src="images/brand/5.png" alt="brand images"></a></li>
-                                <li><a href="#"><img src="images/brand/5.png" alt="brand images"></a></li>
-                                <li><a href="#"><img src="images/brand/1.png" alt="brand images"></a></li>
-                                <li><a href="#"><img src="images/brand/2.png" alt="brand images"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Brand Area -->
+        
         <!-- Start Blog Area -->
         <section class="htc__blog__area bg__white ptb--100">
             <div class="container">

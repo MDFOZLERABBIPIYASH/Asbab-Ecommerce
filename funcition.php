@@ -87,7 +87,7 @@ function get_product_cart($conn,$pro_id=''){
     function getcartdata($conn,$id=''){
     $id=$_POST['id'];
     //echo $id;
-        $sql="SELECT * FROM product WHERE id='$id' ASC";
+        $sql="SELECT * FROM product WHERE id='$id'";
         $result=mysqli_query($conn,$sql);
         if(mysqli_num_rows($result)>0){
         

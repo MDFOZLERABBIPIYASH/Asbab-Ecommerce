@@ -6,7 +6,8 @@
        //print_r($_POST['id']);
        
 
-        if(isset($_SESSION['cart'])){
+        if(isset($_SESSION['name'])){
+            //$_SESSION['cart']=array('name','img','Price','sale_price');
             //$column=$_POST['id'];
             //echo $column;
             $item_array_id=array_column($_SESSION['cart'],column_key:"id");
@@ -62,44 +63,63 @@
                                             <th class="product-thumbnail">products</th>
                                             <th class="product-name">name of products</th>
                                             <th class="product-price">Price</th>
-                                            <th class="product-quantity">Quantity</th>
-                                            <th class="product-subtotal">Total</th>
+                                            <!--<th class="product-quantity">Quantity</th>
+                                            <th class="product-subtotal">Total</th>-->
                                             <th class="product-remove">Remove</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <?php
+                                    <?php
+                                        if(isset($_SESSION['name'])){
                                             $product_id=array_column($_SESSION['cart'],column_key:"id");
-                                            $get_product_cart = get_product_cart($conn);
-                                            if(count($get_product_cart)>0){
-                                                foreach($product_id as $pro_id){
-                                                    if($_POST['id']==$pro_id){
-                                                        echo "ok";
+                                            $getcartdata = getcartdata($conn);
+                                            /*if(count($get_product_cart)>0){*/
+                                            while($row=mysqli_fetch_assoc($getcartdata)){
+                                                foreach($product_id as $id){
+                                                    if($row['id']==$id){
+                                                        //echo "ok";
                                                     
                                         
                                         ?>
+                                    <tbody>
+                                        
                                         <tr>
                                             <td class="product-thumbnail"><a href="#"><img src="admin_login/admin_dasboard/<?php echo $row['img']; ?>" alt="product img" /></a></td>
                                             <td class="product-name"><a href=""><?php echo $row['name']; ?></a>
                                                 <ul  class="pro__prize">
-                                                    <li class="old__prize">$82.5</li>
-                                                    <li>$75.2</li>
+                                                    <li class="old__prize"><?php echo "$".$row['Price']; ?></li>
+                                                    <li><?php echo "$".$row['sale_price']; ?></li>
                                                 </ul>
                                             </td>
-                                            <td class="product-price"><span class="amount">£165.00</span></td>
-                                            <td class="product-quantity"><input type="number" value="1" /></td>
-                                            <td class="product-subtotal">£165.00</td>
+                                            <td class="product-price">
+                                                <span class="amount">
+                                                    <?php
+                                                        $price=$row['Price'];
+                                                        $sale=$row['sale_price'];
+                                                        if($sale<$price){
+                                                            echo "$".$sale;
+                                                        }else{
+                                                            echo "$".$price;
+                                                        }
+                                                    ?>
+                                                </span>
+                                            </td>
+                                            <!--<td class="product-quantity"><input type="number" value="1" /></td>
+                                            <td class="product-subtotal">£165.00</td>-->
                                             <td class="product-remove">
                                                 <button type="submit" class="btn btn-danger"><i class="icon-trash icons"></i></button>
                                                 <button type="submit" class="btn btn-warning"><i class="icon-heart icons"></i></button>
                                             </td>
                                         </tr>
-                                        <?php
+                                        
+                                    </tbody>
+                                    <?php
                                             }
                                         }
                                     }
+                                }else{
+                                    echo "No Product Added Here..!!";
+                                }
                                         ?>
-                                    </tbody>
                                 </table>
                             </div>
                             <div class="row">
@@ -132,11 +152,22 @@
                                         <h6>cart total</h6>
                                         <div class="cart__desk__list">
                                             <ul class="cart__desc">
+                                                <li>product</li>
                                                 <li>cart total</li>
                                                 <li>tax</li>
                                                 <li>shipping</li>
                                             </ul>
                                             <ul class="cart__price">
+                                                <li>
+                                                    <?php
+                                                        if(isset($_SESSION['name'])){
+                                                            $count=count($_SESSION['cart']);
+                                                            echo $count." Items" ;
+                                                        }else{
+                                                            echo "0 Items";
+                                                        }
+                                                    ?>
+                                                </li>
                                                 <li>$909.00</li>
                                                 <li>$9.00</li>
                                                 <li>0</li>
@@ -159,43 +190,8 @@
             </div>
         </div>
         <!-- cart-main-area end -->
-        <!-- Start Brand Area -->
-        <div class="htc__brand__area bg__cat--4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="ht__brand__inner">
-                            <ul class="brand__list owl-carousel clearfix">
-                                <li><a href="#"><img src="images/brand/1.png" alt="brand images"></a></li>
-                                <li><a href="#"><img src="images/brand/2.png" alt="brand images"></a></li>
-                                <li><a href="#"><img src="images/brand/3.png" alt="brand images"></a></li>
-                                <li><a href="#"><img src="images/brand/4.png" alt="brand images"></a></li>
-                                <li><a href="#"><img src="images/brand/5.png" alt="brand images"></a></li>
-                                <li><a href="#"><img src="images/brand/5.png" alt="brand images"></a></li>
-                                <li><a href="#"><img src="images/brand/1.png" alt="brand images"></a></li>
-                                <li><a href="#"><img src="images/brand/2.png" alt="brand images"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Brand Area -->
-        <!-- Start Banner Area -->
-        <div class="htc__banner__area">
-            <ul class="banner__list owl-carousel owl-theme clearfix">
-                <li><a href="product-details.html"><img src="images/banner/bn-3/1.jpg" alt="banner images"></a></li>
-                <li><a href="product-details.html"><img src="images/banner/bn-3/2.jpg" alt="banner images"></a></li>
-                <li><a href="product-details.html"><img src="images/banner/bn-3/3.jpg" alt="banner images"></a></li>
-                <li><a href="product-details.html"><img src="images/banner/bn-3/4.jpg" alt="banner images"></a></li>
-                <li><a href="product-details.html"><img src="images/banner/bn-3/5.jpg" alt="banner images"></a></li>
-                <li><a href="product-details.html"><img src="images/banner/bn-3/6.jpg" alt="banner images"></a></li>
-                <li><a href="product-details.html"><img src="images/banner/bn-3/1.jpg" alt="banner images"></a></li>
-                <li><a href="product-details.html"><img src="images/banner/bn-3/2.jpg" alt="banner images"></a></li>
-            </ul>
-        </div>
-        <!-- End Banner Area -->
-        <!-- End Banner Area -->
+        
+
 
 <?php
     require "footer.php";

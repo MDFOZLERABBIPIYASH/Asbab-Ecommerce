@@ -7,7 +7,7 @@ require "header.php";
 
 
 
-        $sql_pro="SELECT * FROM product limit 2 and cat_id='$cat_id' ORDER BY id DESC WHERE status=1";
+        $sql_pro="SELECT * FROM product  and cat_id='$cat_id'  WHERE status=1 ORDER BY id DESC limit 2";
         //$sql_pro="SELECT * FROM product WHERE cat_id='$cat_id' ";
         //for category id
         /*if($cat_id!=''){
