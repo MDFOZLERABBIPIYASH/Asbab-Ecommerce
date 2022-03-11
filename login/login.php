@@ -26,7 +26,8 @@
 			$_SESSION['name']=$row['name'];
 			$_SESSION['password']=$row['password'];
 			
-			
+			$cart=[];
+			$_SESSION['cart']=$cart;
 			
 
 			header("location:../user_account/index.php");

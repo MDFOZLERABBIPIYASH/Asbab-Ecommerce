@@ -37,12 +37,8 @@
                                     <?php
                                         if(isset($_SESSION['name'])){
                                             $product_id=array_column($_SESSION['cart'],column_key:"id");
-                                            $getcartdata = getcartdata($conn);
-                                            /*if(count($get_product_cart)>0){*/
-                                            while($row=mysqli_fetch_assoc($getcartdata)){
-                                                foreach($product_id as $id){
-                                                    if($row['id']==$id){
-                                                        //echo "ok";
+                                            $get_product = get_product($conn,$data);
+                                                foreach($get_product as $list){
                                                     
                                         
                                         ?>
@@ -80,8 +76,6 @@
                                     </tbody>
                                     <?php
                                             }
-                                        }
-                                    }
                                 }else{
                                     echo "No Product Added Here..!!";
                                 }

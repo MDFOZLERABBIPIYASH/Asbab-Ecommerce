@@ -84,14 +84,29 @@ function get_product_cart($conn,$pro_id=''){
 
     // get data for cart
 
-    function getcartdata($conn,$id=''){
-    $id=$_POST['id'];
-    //echo $id;
+    function getcartdata($conn,$id){
+    
+   //echo $id;
         $sql="SELECT * FROM product WHERE id='$id'";
         $result=mysqli_query($conn,$sql);
-        if(mysqli_num_rows($result)>0){
+        $response= mysqli_fetch_assoc( $result);
+        //if(mysqli_num_rows($result)>0){
         
+        //}
+        return $response;   
+    }
+
+
+
+
+    //for cart page 2
+    function get_cart($conn,$data){
+        $sql_pro="SELECT * FROM product ";
+        $pro_query=mysqli_query($conn,$sql_pro);
+        $data=array();
+        while($row=mysqli_fetch_assoc($pro_query)){
+            $data[]=$row;
         }
-        return $result;   
+        return $data;
     }
 ?>

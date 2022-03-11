@@ -3,17 +3,34 @@
 require "header.php";
     //for delete cart product
     if(isset($_POST['remove'])){
-        foreach($_SESSION['cart'] as $key=>$value){
-            if($value['id'] == $_POST['id']){
-                unset($_SESSION['cart'][$key]);
+        //foreach(array_keys(['id']) as $key=>$value){
+            if($key=$_POST['id']){
+                $_SESSION['cart']=array_diff($_SESSION['cart'],[$key]);
+                //if()){
+                //unset($_SESSION['cart'][$key]);
                 echo "<script>alert('Product is Removed...!!')</script>";
                 echo "<script>window.location='cart.php'</script>";
             }else{
                 echo "<script>alert('Product is Not Removed...!!')</script>";
                 echo "<script>window.location='cart.php'</script>";
-            }
-        }    
-    }
+            }//
+        } //}   
+    //}
+
+
+    if(isset($_POST['delete'])){
+        //foreach(array_keys(['id']) as $key=>$value){
+            if($key=$_POST['id']){
+                //$_SESSION['cart']=array_diff($_SESSION['cart'],[$key]);
+                if($_SESSION['cart']=array_diff($_SESSION['cart'],[$key])){
+                unset($_SESSION['cart'][$key]);
+                echo "<script>alert('Product is Removed...!!')</script>";
+                echo "<script>window.location='cart.php'</script>";
+            }else{
+                echo "<script>alert('All Products Removed...!!')</script>";
+                echo "<script>window.location='cart.php'</script>";
+            }//
+        } }   
 
 
         //for cart product storing and showing

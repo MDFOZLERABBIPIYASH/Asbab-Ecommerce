@@ -8,23 +8,29 @@
     //for cart product storing and showing
     if(isset($_POST['add'])){
         if(isset($_SESSION['name'])){
-            $item_array_id=array_column((array)$_SESSION['cart'],column_key:"id");
-            if(in_array($_POST['id'],$item_array_id)){
+            if(in_array($_POST['id'],$_SESSION['cart'])){
                 echo "<script>alert('Product is already added...!!')</script>";
             }else{
-                $count=count((array)$_SESSION['cart']);
-                $item_array = array(
-                    'id'=>$_POST['id']
-                );
-                $_SESSION['cart'][$count]=$item_array;
+            // $item_array_id=array_column((array)$_SESSION['cart'],column_key:"id");
+            // if(in_array($_POST['id'],$item_array_id)){
+            //     echo "<script>alert('Product is already added...!!')</script>";
+            // }else{
+            //     $count=count((array)$_SESSION['cart']);
+            //     $item_array = array(
+            //         'id'=>$_POST['id']
+            //     );
+            //     $_SESSION['cart'][$count]=$item_array;
+//echo $_POST['id'];
+            array_push($_SESSION['cart'],$_POST['id']);
+            
             }
         }else{
-            $item_array = array(
-                'Pro_id'=>$_POST['id']
-            );
-            $_SESSION['cart'][0]=$item_array;
-            print_r($_SESSION['cart']);
-            echo "nothing........!!!!";
+            // $item_array = array(
+            //     'Pro_id'=>$_POST['id']
+            // );
+            // $_SESSION['cart'][0]=$item_array;
+            // print_r($_SESSION['cart']);
+            //echo "nothing........!!!!";
     }
 }
     
@@ -62,12 +68,15 @@
                                     </thead>
                                     <?php
                                         if(isset($_SESSION['name'])){
-                                            $product_id=array_column($_SESSION['cart'],column_key:"id");
-                                            $getcartdata = getcartdata($conn);
+                                            $product_id =  $_SESSION['cart'];
+                                            //print_r($_SESSION['cart']);
                                             /*if(count($get_product_cart)>0){*/
-                                            while($row=mysqli_fetch_assoc($getcartdata)){
+                                            
                                                 foreach($product_id as $id){
-                                                    if($row['id']==$id){
+                                                    //echo $id;
+                                            $getcartdata= getcartdata($conn,$id);
+                                                    //print_r($getcartdata) ;
+                                                    //if($row['id']==$id){
                                                         //echo "ok";
                                                     
                                         
@@ -75,18 +84,18 @@
                                     <tbody>
                                         
                                         <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="admin_login/admin_dasboard/<?php echo $row['img']; ?>" alt="product img" /></a></td>
-                                            <td class="product-name"><a href=""><?php echo $row['name']; ?></a>
+                                            <td class="product-thumbnail"><a href=""><img src="admin_login/admin_dasboard/<?php echo $getcartdata['img']; ?>" alt="product img" /></a></td>
+                                            <td class="product-name"><a href=""><?php echo $getcartdata['name']; ?></a>
                                                 <ul  class="pro__prize">
-                                                    <li class="old__prize"><?php echo "$".$row['Price']; ?></li>
-                                                    <li><?php echo "$".$row['sale_price']; ?></li>
+                                                    <li class="old__prize"><?php echo "$".$getcartdata['Price']; ?></li>
+                                                    <li><?php echo "$".$getcartdata['sale_price']; ?></li>
                                                 </ul>
                                             </td>
                                             <td class="product-price">
                                                 <span class="amount">
                                                     <?php
-                                                        $price=$row['Price'];
-                                                        $sale=$row['sale_price'];
+                                                        $price=$getcartdata['Price'];
+                                                        $sale=$getcartdata['sale_price'];
                                                         if($sale>$price){
                                                             echo "$".$sale;
                                                         }else{
@@ -99,11 +108,11 @@
                                             <td class="product-subtotal">£165.00</td>-->
                                             <td class="product-remove">
                                                 <!-- For delete-->
-                                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                                <input type="hidden" name="id" value="<?php echo $getcartdata['id']; ?>">
                                                 <button type="submit" name="remove" id="remove" class="btn btn-danger"><i class="icon-trash icons"></i></button>
                                                 
                                                 <!--For add wishlist-->
-                                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                                <input type="hidden" name="id" value="<?php echo $getcartdata['id']; ?>">
                                                 <button type="submit" class="btn btn-warning"><i class="icon-heart icons"></i></button>
                                             </td>
                                         </tr>
@@ -111,8 +120,8 @@
                                     </tbody>
                                     <?php
                                             }
-                                        }
-                                    }
+                                        //}
+                                    
                                 }else{
                                     echo "No Product Added Here..!!";
                                 }
@@ -126,6 +135,17 @@
                                             <a href="#">Continue Shopping</a>
                                         </div>
                                         <div class="buttons-cart checkout--btn">
+                                            <button type="submit" name="delete" id="delete" style="background: #ebebeb none repeat scroll 0 0;
+    color: #3f3f3f;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    height: 62px;
+    line-height: 62px;
+    padding: 0 45px;
+    margin-right:15px;
+    text-transform: uppercase;
+    display: inline-block;">Remove All</button>
                                             <a href="#">update</a>
                                             <a href="#">checkout</a>
                                         </div>
