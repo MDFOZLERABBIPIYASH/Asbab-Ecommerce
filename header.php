@@ -246,7 +246,7 @@
                                         <a class="" href="cart.php"><i class="icon-handbag icons"></i></a>
                                         <?php
                                             if(isset($_SESSION['name'])){
-                                                $count=count($_SESSION['cart']);
+                                                $count=count((array)$_SESSION['cart']);
                                                 echo "<a href='cart.php'><span class='htc__qua'>$count</span></a>";
                                             }else{
                                                 echo "<a href='cart.php'><span class='htc__qua'>0</span></a>";

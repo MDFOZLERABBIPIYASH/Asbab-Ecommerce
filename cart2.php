@@ -1,32 +1,6 @@
 <?php
     require "header.php";
     require "funcition.php";
-
-
-    
-
-    //for cart product storing and showing
-    if(isset($_POST['add'])){
-        if(isset($_SESSION['name'])){
-            $item_array_id=array_column((array)$_SESSION['cart'],column_key:"id");
-            if(in_array($_POST['id'],$item_array_id)){
-                echo "<script>alert('Product is already added...!!')</script>";
-            }else{
-                $count=count((array)$_SESSION['cart']);
-                $item_array = array(
-                    'id'=>$_POST['id']
-                );
-                $_SESSION['cart'][$count]=$item_array;
-            }
-        }else{
-            $item_array = array(
-                'Pro_id'=>$_POST['id']
-            );
-            $_SESSION['cart'][0]=$item_array;
-            print_r($_SESSION['cart']);
-            echo "nothing........!!!!";
-    }
-}
     
 ?>
         <!-- Start Bradcaump area -->
@@ -47,7 +21,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <form action="mnz.php" method="POST">                            
+                        <form action="cart.php" method="GET">                            
                             <div class="table-content table-responsive">
                                 <table>
                                     <thead>
@@ -87,7 +61,7 @@
                                                     <?php
                                                         $price=$row['Price'];
                                                         $sale=$row['sale_price'];
-                                                        if($sale>$price){
+                                                        if($sale<$price){
                                                             echo "$".$sale;
                                                         }else{
                                                             echo "$".$price;
@@ -98,12 +72,7 @@
                                             <!--<td class="product-quantity"><input type="number" value="1" /></td>
                                             <td class="product-subtotal">£165.00</td>-->
                                             <td class="product-remove">
-                                                <!-- For delete-->
-                                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                                <button type="submit" name="remove" id="remove" class="btn btn-danger"><i class="icon-trash icons"></i></button>
-                                                
-                                                <!--For add wishlist-->
-                                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                                <button type="submit" class="btn btn-danger"><i class="icon-trash icons"></i></button>
                                                 <button type="submit" class="btn btn-warning"><i class="icon-heart icons"></i></button>
                                             </td>
                                         </tr>

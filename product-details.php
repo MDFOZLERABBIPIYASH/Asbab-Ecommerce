@@ -132,6 +132,21 @@
                                             <div class="cr__btn" style="margin-top: 20px;">
                                                 <button type="submit" name="add">Add To Cart</button>
                                                 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+
+
+                                                
+                                                <input type="hidden" name="name" value="<?php echo $row['name']; ?>">
+                                                <input type="hidden" name="price" value="
+                                                <?php 
+                                                    $price=$row['Price'];
+                                                    $sale=$row['sale_price'];
+                                                    if($sale>$price){
+                                                        echo "$".$sale;
+                                                    }else{
+                                                        echo "$".$price;
+                                                    }
+                                                ?>">
+                                                <input type="hidden" name="img" value="<?php echo $row['img']; ?>">
                                                 <!--<a href="cart.php?add=">Add To Cart</a>-->
                                             </div>
                                             
